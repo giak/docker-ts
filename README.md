@@ -29,16 +29,8 @@ Ce boilerplate fournit une structure de base pour un projet Vue.js avec TypeScri
 
 ## Développement
 
-Pour travailler sur le projet en mode développement :
+Ce projet utilise Biome pour le linting et le formatage du code, ainsi que Husky et lint-staged pour assurer la qualité du code à chaque commit.
 
-1. Assurez-vous que NODE_ENV=development dans votre fichier .env
-2. Lancez les conteneurs avec :
-   ```
-   docker-compose -f docker/docker-compose.yml up -d
-   ```
+### Vérification du code
 
-Les modifications dans le dossier `src` seront reflétées en temps réel grâce au montage de volume.
-
-## Tests
-
-Pour exécuter les tests :
+Pour vérifier tout le code :

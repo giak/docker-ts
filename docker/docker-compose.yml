@@ -13,6 +13,11 @@ services:
     environment:
       - NODE_ENV=${NODE_ENV:-production}
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   # Ajoutez d'autres services si nécessaire (base de données, cache, etc.)
 

@@ -1,5 +1,5 @@
 # Utiliser une image de base plus légère
-FROM node:20-alpine
+FROM node:20-alpine AS base
 
 # Installer pnpm globalement
 RUN npm install -g pnpm
