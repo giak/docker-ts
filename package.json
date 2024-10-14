@@ -27,14 +27,18 @@
     "format:write": "biome check --apply .",
     "generate:component": "node scripts/generateComponent.js",
     "test:unit": "vitest",
-    "test:e2e:open": "cypress open"
+    "test:e2e:open": "cypress open",
+    "commit": "cz",
+    "smart-commit": "node scripts/smart-commit.js"
   },
   "dependencies": {
     "@datastructures-js/priority-queue": "^6.3.1",
     "@primevue/themes": "^4.1.0",
     "autoprefixer": "^10.4.20",
     "date-fns": "^4.1.0",
+    "dotenv": "^16.4.5",
     "lodash-es": "^4.17.21",
+    "node-fetch": "^3.3.2",
     "pinia": "^2.2.4",
     "pinia-plugin-persistedstate": "^4.1.1",
     "postcss": "^8.4.47",
@@ -48,6 +52,8 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.3",
+    "@commitlint/config-conventional": "^19.5.0",
+    "@commitlint/cz-commitlint": "^19.5.0",
     "@pinia/testing": "^0.1.6",
     "@tsconfig/node20": "^20.1.4",
     "@types/lodash-es": "^4.17.12",
@@ -80,5 +86,10 @@
     "**/*.{js,ts,jsx,tsx,vue}": [
       "biome check --apply --organize-imports-enabled=false --no-errors-on-unmatched"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "@commitlint/cz-commitlint"
+    }
   }
 }
