@@ -34,3 +34,25 @@ Ce projet utilise Biome pour le linting et le formatage du code, ainsi que Husky
 ### Vérification du code
 
 Pour vérifier tout le code :
+
+## Outils de développement
+
+### Biome
+
+Ce projet utilise Biome pour le linting et le formatage. Pour vérifier le code :
+
+
+
+
+
+### Husky et lint-staged
+
+Les hooks de pré-commit sont configurés avec Husky et lint-staged pour vérifier automatiquement le code avant chaque commit.
+
+## Scripts utiles
+
+- `pnpm dev` : Démarre le serveur de développement
+- `pnpm build` : Construit l'application pour la production
+- `pnpm test` : Exécute les tests
+- `pnpm format:check` : Vérifie le formatage du code
+- `pnpm format:write` : Formate le code

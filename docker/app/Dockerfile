@@ -1,26 +1,33 @@
-# Utiliser une image de base plus légère
-FROM node:20-alpine AS base
+# Utiliser une image de base plus légère et spécifique à Node.js
+FROM node:20-alpine AS deps
 
-# Installer pnpm globalement
-RUN npm install -g pnpm
+# Utiliser PNPM_VERSION pour faciliter les mises à jour
+ARG PNPM_VERSION=8.15.1
+RUN npm install -g pnpm@$PNPM_VERSION
 
 # Définir le répertoire de travail
 WORKDIR /app
 
-# Copier les fichiers de configuration
+# Copier uniquement les fichiers nécessaires pour l'installation
 COPY package.json pnpm-lock.yaml ./
-
-# Installer les dépendances
 RUN pnpm install --frozen-lockfile
 
-# Copier le reste des fichiers du projet
+# Build stage
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-
-# Construire l'application
 RUN pnpm build
 
-# Exposer le port (ajustez selon vos besoins)
-EXPOSE 3000
+# Production stage
+FROM node:20-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV production
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
 
-# Commande pour démarrer l'application
-CMD ["pnpm", "start"]
+# Utiliser un utilisateur non-root pour plus de sécurité
+USER node
+
+EXPOSE 3000
+CMD ["node", "dist/server.js"]
